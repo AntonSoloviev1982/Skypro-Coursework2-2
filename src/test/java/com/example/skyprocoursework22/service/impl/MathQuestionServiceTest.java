@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
@@ -18,13 +17,13 @@ import java.util.Set;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class JavaQuestionServiceTest {
+public class MathQuestionServiceTest {
 
     @Mock
     private QuestionRepository repository;
 
     @InjectMocks
-    private JavaQuestionService questionService;
+    private MathQuestionService questionService;
 
     private Set<Question> questions;
 
@@ -38,10 +37,10 @@ public class JavaQuestionServiceTest {
 
     @BeforeEach
     public void beforeEach() {
-        question1 = new Question("Java вопрос 1", "Java ответ 1");
-        question2 = new Question("Java вопрос 2", "Java ответ 2");
-        question3 = new Question("Java вопрос 3", "Java ответ 3");
-        question4 = new Question("Java вопрос 4", "Java ответ 4");
+        question1 = new Question("Math вопрос 1", "Math ответ 1");
+        question2 = new Question("Math вопрос 2", "Math ответ 2");
+        question3 = new Question("Math вопрос 3", "Math ответ 3");
+        question4 = new Question("Math вопрос 4", "Math ответ 4");
 
         questions = new HashSet<>();
         questions.add(question1);
@@ -76,10 +75,9 @@ public class JavaQuestionServiceTest {
         Assertions.assertThat(questionService.getAll())
                 .hasSize(3)
                 .containsExactlyInAnyOrder(
-                        new Question("Java вопрос 1", "Java ответ 1"),
-                        new Question("Java вопрос 2", "Java ответ 2"),
-                        new Question("Java вопрос 3", "Java ответ 3")
+                        new Question("Math вопрос 1", "Math ответ 1"),
+                        new Question("Math вопрос 2", "Math ответ 2"),
+                        new Question("Math вопрос 3", "Math ответ 3")
                 );
     }
-
 }
