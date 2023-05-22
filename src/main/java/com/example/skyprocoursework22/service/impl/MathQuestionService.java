@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class JavaQuestionService implements QuestionService {
+public class MathQuestionService implements QuestionService {
 
     private final QuestionRepository repository;
 
-    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository repository) {
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository repository) {
         this.repository = repository;
     }
 

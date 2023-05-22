@@ -1,0 +1,25 @@
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 1&answer=Математический ответ 1
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 2&answer=Математический ответ 2
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 3&answer=Математический ответ 3
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 4&answer=Математический ответ 4
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 5&answer=Математический ответ 5
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 6&answer=Математический ответ 6
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 7&answer=Математический ответ 7
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 8&answer=Математический ответ 8
+###
+GET http://localhost:8080/exam/math/add?question=Математический вопрос 9&answer=Математический ответ 9
+
+###
+GET http://localhost:8080/exam/math/remove?question=Математический вопрос 9&answer=Математический ответ 9
+
+###
+GET http://localhost:8080/exam/math
+

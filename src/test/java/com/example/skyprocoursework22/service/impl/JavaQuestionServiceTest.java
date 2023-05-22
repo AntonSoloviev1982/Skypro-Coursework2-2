@@ -2,15 +2,22 @@ package com.example.skyprocoursework22.service.impl;
 
 import com.example.skyprocoursework22.exception.QuestionNotFoundException;
 import com.example.skyprocoursework22.model.Question;
+import com.example.skyprocoursework22.repository.QuestionRepository;
 import com.example.skyprocoursework22.service.QuestionService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 public class JavaQuestionServiceTest {
 
-    private final QuestionService questionService = new JavaQuestionService();
+    @Mock
+    private QuestionRepository repository;
+
+    @InjectMocks
+    private QuestionService questionService;
 
     @BeforeEach
     public void beforeEach() {

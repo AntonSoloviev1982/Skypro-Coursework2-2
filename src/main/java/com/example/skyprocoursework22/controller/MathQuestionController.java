@@ -12,28 +12,28 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/exam")
-public class JavaQuestionController {
+public class MathQuestionController {
 
     private final QuestionService service;
 
-    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService service) {
+    public MathQuestionController(@Qualifier("mathQuestionService") QuestionService service) {
         this.service = service;
     }
 
-    @GetMapping("/java/add")
+    @GetMapping("/math/add")
     public Question addQuestion(@RequestParam("question") String question,
                                 @RequestParam("answer") String answer) {
         return service.add(question, answer);
     }
 
-    @GetMapping("/java/remove")
+    @GetMapping("/math/remove")
     public Question removeQuestion(@RequestParam("question") String question,
                                    @RequestParam("answer") String answer) {
         Question newQuestion = new Question(question, answer);
         return service.remove(newQuestion);
     }
 
-    @GetMapping("/java")
+    @GetMapping("/math")
     public Collection<Question> getQuestions() {
         return service.getAll();
     }
