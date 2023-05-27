@@ -3,62 +3,70 @@ package com.example.skyprocoursework22.service.impl;
 
 import com.example.skyprocoursework22.exception.QuestionIllegalArgumentException;
 import com.example.skyprocoursework22.model.Question;
-import com.example.skyprocoursework22.service.QuestionService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collection;
 import java.util.Set;
-import java.util.stream.Stream;
+
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTest {
 
     @Mock
-    private QuestionService questionService;
+    private JavaQuestionService javaQuestionService;
+
+    @Mock
+    private MathQuestionService mathQuestionService;
 
     @InjectMocks
     private ExaminerServiceImpl examinerService;
 
-    private Set<Question> questions;
-
+    Question javaQuestion1;
+    Question javaQuestion2;
+    Question mathQuestion1;
+    Question mathQuestion2;
     @BeforeEach
     public void beforeEach() {
-        questions = Set.of(
-                new Question("Вопрос 1", "Ответ 1"),
-                new Question("Вопрос 2", "Ответ 2"),
-                new Question("Вопрос 3", "Ответ 3")
-        );
+        examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
 
-        Mockito.when(questionService.getAll()).thenReturn(questions);
+        javaQuestion1 = new Question("Java вопрос 1", "Java ответ 1");
+        javaQuestion2 = new Question("Java вопрос 2", "Java ответ 2");
+        mathQuestion1 = new Question("Math вопрос 1", "Math ответ 1");
+        mathQuestion2 = new Question("Math вопрос 2", "Math ответ 2");
+
     }
 
-//    public static Stream<Arguments> getQuestionsTestParams() {
-//        return Stream.of(
-//                Arguments.of(new Question("Вопрос 1", "Ответ 1")),
-//                Arguments.of(new Question("Вопрос 2", "Ответ 2")),
-//                Arguments.of(new Question("Вопрос 3", "Ответ 3"))
-//        );
-//    }
 
     @Test
-    public void getQuestionsTest(Question expected) {
+    public void getQuestionsTest() {
+
+        when(javaQuestionService.getAll()).thenReturn(Set.of(javaQuestion1, javaQuestion2));
+        when(mathQuestionService.getAll()).thenReturn(Set.of(mathQuestion1, mathQuestion2));
+        when(javaQuestionService.getRandomQuestion()).thenReturn(javaQuestion1);
+        when(mathQuestionService.getRandomQuestion()).thenReturn(mathQuestion1);
+
+        Collection<Question> result = examinerService.getQuestions(2);
+
+        Assertions.assertThat(result).contains(javaQuestion1);
+        Assertions.assertThat(result).contains(mathQuestion1);
+
+        verify(javaQuestionService, atLeast(1)).getRandomQuestion();
+        verify(mathQuestionService, atLeast(1)).getRandomQuestion();
 
     }
 
     @Test
-    public void getQuestionsWhenAmountMoreThenSetQuestionsSizeTest() {
-
-
+    public void getQuestionsIllegalArgumentTest() {
+        Assertions.assertThatExceptionOfType(QuestionIllegalArgumentException.class).isThrownBy(() -> examinerService.getQuestions(2));
     }
+
 
 
 
